@@ -3,55 +3,55 @@ import sys
 import heapq
 from collections import deque
 
-# Initialize Pygame for visualization
 pygame.init()
 
-# Set display dimensions
 WIDTH, HEIGHT = 800, 600
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Graph Traversal Visualization")
 
-# Colors for nodes and edges
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 BLUE = (0, 0, 255)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 
-# Sample graph represented as an adjacency list
+# Dictionary
 graph = {
     'A': [('B', 1), ('C', 1)],
     'B': [('D', 1), ('E', 1)],
     'C': [('F', 1)],
-    'D': [],
+    'D': [('H', 1)],
     'E': [('F', 1)],
-    'F': []
+    'F': [('G', 1)],
+    'G': [],
+    'H': []
 }
 
-# Node positions for visualization
 node_positions = {
     'A': (100, 100),
     'B': (200, 200),
     'C': (200, 50),
     'D': (300, 250),
     'E': (300, 150),
-    'F': (400, 100)
+    'F': (400, 100),
+    'G': (500, 300),
+    'H': (600, 160)
 }
 
-# Draw the graph
 def draw_graph(path=[]):
     window.fill(WHITE)
-    # Draw edges
     for node in graph:
         for neighbor, _ in graph[node]:
             pygame.draw.line(window, BLACK, node_positions[node], node_positions[neighbor], 2)
-    # Draw nodes
     for node, position in node_positions.items():
         color = RED if node in path else BLUE
         pygame.draw.circle(window, color, position, 20)
+        font = pygame.font.Font(None, 24)
+        text = font.render(node, True, BLACK)
+        window.blit(text, (position[0] - 10, position[1] - 10))
     pygame.display.update()
 
-# Depth First Search
+# DFS
 def depth_first_search(graph, start):
     stack = [start]
     visited = set()
@@ -68,7 +68,7 @@ def depth_first_search(graph, start):
                     stack.append(neighbor)
     return path
 
-# Breadth First Search
+# BFS
 def breadth_first_search(graph, start):
     queue = deque([start])
     visited = set()
@@ -85,7 +85,7 @@ def breadth_first_search(graph, start):
                     queue.append(neighbor)
     return path
 
-# Dijkstra's Algorithm
+# Dijkstra
 def dijkstra(graph, start):
     priority_queue = [(0, start)]
     distances = {node: float('inf') for node in graph}
@@ -95,7 +95,7 @@ def dijkstra(graph, start):
         current_distance, current_node = heapq.heappop(priority_queue)
         if current_node not in path:
             path.append(current_node)
-            draw_graph(path)  # Visualize step
+            draw_graph(path)
             pygame.time.delay(500)
         for neighbor, weight in graph[current_node]:
             distance = current_distance + weight
@@ -104,7 +104,6 @@ def dijkstra(graph, start):
                 heapq.heappush(priority_queue, (distance, neighbor))
     return distances
 
-# Main loop for visualization
 def main():
     running = True
     while running:
