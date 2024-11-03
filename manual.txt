@@ -19,3 +19,46 @@ Key 3: Runs Dijkstra's Algorithm starting from node 'A'.
 Dijkstra's Algorithm finds the shortest path from the starting node to all other nodes using edge weights.
 
 Nodes turn red as they are visited.
+
+Detailed Instructions for Adjustments
+1. Adjusting Graph Data:
+  - To change the graph structure, modify the `graph` dictionary.
+  - Example: To add a new node 'G' connected to 'A' and 'F', update as follows:
+      graph['A'].append(('G', 1))
+      graph['F'].append(('G', 1))
+      graph['G'] = []
+
+ 2. Adjusting Node Positions:
+    - To reposition nodes on the screen, modify the `node_positions` dictionary.
+    - Example: To change the position of node 'A', update as follows:
+      node_positions['A'] = (150, 150)
+
+3. Changing Visualization Speed:
+    - Adjust the delay in each algorithm (`pygame.time.delay(500)`) to control the speed of visualization.
+    - Example: To speed up the visualization, reduce the delay value (e.g., `pygame.time.delay(200)`).
+
+4. Customizing Colors and Appearance:
+    - Modify the color variables (`RED`, `BLUE`, `BLACK`, etc.) to change the appearance of nodes and edges.
+    - Example: To change the node color to yellow, update as follows:
+      BLUE = (255, 255, 0)
+
+5. Adding More Algorithms:
+    - To add a new traversal or pathfinding algorithm, create a new function similar to `depth_first_search()`.
+    - Example: Define a new function `def new_algorithm(graph, start):` and add the logic.
+    - Add a corresponding key event in the `main()` function to call the new algorithm.
+
+6. Changing Window Dimensions:
+    - To change the window size, modify the `WIDTH` and `HEIGHT` variables.
+    - Example: To make the window larger, update as follows:
+      WIDTH, HEIGHT = 1000, 800
+
+ 7. Adjusting Node Size:
+    - Modify the size parameter in `pygame.draw.circle()` to change the node size.
+    - Example: To make nodes larger, update as follows:
+      pygame.draw.circle(window, color, position, 30)
+
+ 8. Adding Interactivity:
+    - Add more interactive events in the `main()` function.
+    - Example: Add a reset key to clear the graph and redraw:
+     if event.key == pygame.K_r:
+          draw_graph()
