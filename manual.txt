@@ -1,0 +1,21 @@
+Using the Visualization
+
+After running the script, you will see the graph displayed in the window. You can use the following keys to start the different graph traversal algorithms:
+
+Key 1: Runs Depth First Search (DFS) starting from node 'A'.
+
+DFS explores as deep as possible along each branch before backtracking.
+
+Nodes turn red when they are visited.
+
+Key 2: Runs Breadth First Search (BFS) starting from node 'A'.
+
+BFS explores all nodes at the current level before moving deeper.
+
+Nodes turn red when they are visited.
+
+Key 3: Runs Dijkstra's Algorithm starting from node 'A'.
+
+Dijkstra's Algorithm finds the shortest path from the starting node to all other nodes using edge weights.
+
+Nodes turn red as they are visited.
